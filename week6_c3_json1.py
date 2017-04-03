@@ -1,7 +1,7 @@
 import urllib
 import json
 
-serviceurl = 'http://maps.googleapis.com/maps/api/geocode/json?'
+serviceurl = 'http://python-data.dr-chuck.net/geojson?'
 
 while True:
     address=raw_input('Enter Location:')
@@ -15,14 +15,7 @@ while True:
 
     try: js=json.loads(str(data))
     except: js=None
-    if 'status' not in js or js['status']!='OK':
-        print '====Fialure to retrieve===='
-        print data
-        continue
-    print json.dumps(js,indent=4)
+    input=js['results']
+    print input[0]['place_id']
 
-    lat=js["results"][0]["geometry"]["location"]["lat"]
-    lng=js["results"][0]["geometry"]["location"]["lng"]
-    print 'lat',lat,'lng',lng
-    location=js['results'][0]['formatted_address']
-    print location
+
